@@ -1,5 +1,4 @@
 <?php
-<?php
 /**
  * Includes all functions needed to authorize users
  * @author Ivan
