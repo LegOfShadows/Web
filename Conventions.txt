@@ -1,0 +1,12 @@
+[Controller]
+ControllerName.php
+[Model]
+ModelName(singular).php
+[View]
+viewname.php
+[Action]
+actionname {=viewname.php}
+[DB Table]
+names(plural)
+[DB Column]
+tablename(singular)_columnname
