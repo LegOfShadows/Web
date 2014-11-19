@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div id="wrpSidebar">
-		<?php echo $this->GetElement('sidebar_user')?>
+		<?php echo $this->GetElement('sidebar')?>
 	</div>
 	<div id="wrpMain">
 		<div id="wrpHeader">
