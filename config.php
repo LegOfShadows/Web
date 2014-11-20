@@ -1,6 +1,10 @@
 <?php
-/*DEBUG*/
-define ('DEBUG_MODE', TRUE);
+//////////////////////////////
+//DEBUG MODE//////////////////
+//////////////////////////////
+define ('DEBUG_MODE', TRUE);//
+$GLOBALS['debug'] = '';		//
+//////////////////////////////
 
 define ( 'ROOT', dirname ( __FILE__ ) );
 define ( 'DS', DIRECTORY_SEPARATOR );

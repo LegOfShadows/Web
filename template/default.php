@@ -29,6 +29,11 @@
 			<p id="ctrlCopyrights">Clean-Template &copy; 2014</p>
 		</div>
 	</div>
-	<?php if (DEBUG_MODE) {echo '<div id="wrpDebug"></div>';}?>
+	<?php 
+	if (DEBUG_MODE) {
+		echo '<div id="wrpDebug">';
+		echo $GLOBALS['debug'];
+		echo '</div>';
+	}?>
 </body>
 </html>

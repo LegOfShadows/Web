@@ -275,3 +275,15 @@ h6 {
 	color: #fff;
 	background: #808080;
 }
+/* DEBUG */
+#wrpDebug {
+	display: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background: #000;
+	color: #40a040;
+}
+#wrpDebug span:first-child {
+	color: #a0a040;
+}
