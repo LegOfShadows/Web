@@ -1,5 +1,4 @@
 <?php
-namespace lib;
 class Log {
 	/**
 	 * Logs variables into debug output;

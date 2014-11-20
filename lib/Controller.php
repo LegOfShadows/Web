@@ -1,5 +1,4 @@
 <?php
-namespace lib;
 /**
  * Controller base class
  * @author Ivan

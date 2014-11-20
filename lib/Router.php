@@ -1,5 +1,4 @@
 <?php
-namespace lib;
 class Router {
 	private $controller = 'home';
 	private $action = 'index';
@@ -7,7 +6,7 @@ class Router {
 	private $param2 = false;
 	/**
 	 * Allowed Actions for Controllers
-	 * 
+	 *
 	 * @var array of strings
 	 */
 	private $actions = array (
@@ -24,12 +23,12 @@ class Router {
 	/**
 	 * Construct of Router class;
 	 * Parses the url and assigns variables which are used to control the web routing
-	 * 
+	 *
 	 * @param string $url        	
 	 */
 	public function __construct($url) {
 		$command = explode ( '/', $url );
-		$command = array_filter ( $command, "lib\Router::RemoveEmpty" );
+		$command = array_filter ( $command, "Router::RemoveEmpty" );
 		
 		if (isset ( $command [1] )) {
 			$this->controller = $command [1];
@@ -52,7 +51,6 @@ class Router {
 	 * Default Action is always Index
 	 */
 	public function Route() {
-		require CONTROLLER_DIR . $this->GetControllerClassName() . '.php';
 		$class = $this->GetControllerClassName ();
 		$action = $this->action;
 		// Initialize the routed Controller
@@ -61,17 +59,17 @@ class Router {
 		$controller->$action ( $this->param1, $this->param2 );
 	}
 	/**
-	 * Gives the capitalized Class name of the Controller parsed at construct
-	 * 
+	 * Gives the CamelCase Class name of the Controller parsed at construct
+	 *
 	 * @return string
 	 */
 	private function GetControllerClassName() {
-		$name = Core::Capitalize ( $this->controller ) . 'Controller';
+		$name = Core::Camelize ( $this->controller ) . 'Controller';
 		return $name;
 	}
 	/**
 	 * Removes all empty string items from array;
-	 * 
+	 *
 	 * @param String $string:
 	 *        	item to test
 	 * @return s Boolean: false if empty string, true otherwise

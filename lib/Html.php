@@ -1,5 +1,4 @@
 <?php
-namespace lib;
 /**
  * Class for creating a HTML Document
  * @author Ivan

@@ -1,5 +1,4 @@
 <?php
-namespace lib;
 /**
  * Includes all functions needed to authorize users
  * @author Ivan

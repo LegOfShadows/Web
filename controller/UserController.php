@@ -4,7 +4,7 @@
  * @author Ivan
  *
  */
-class UserController extends lib\Controller {
+class UserController extends Controller {
 	public function __construct() {
 		$this->models[] = 'User';
 	}

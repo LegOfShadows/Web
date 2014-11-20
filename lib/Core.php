@@ -1,5 +1,4 @@
 <?php
-namespace lib;
 /**
  * Core file for the Framework
  * Contains all the module loading and global functions

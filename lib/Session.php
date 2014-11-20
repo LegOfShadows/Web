@@ -1,5 +1,4 @@
 <?php
-namespace lib;
 /**
  * Class that provides session control interface
  * for all the core classes
