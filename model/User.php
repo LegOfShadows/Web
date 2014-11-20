@@ -11,6 +11,9 @@ class User extends Model {
 	public $lastlogon;
 	
 	public function SelectByID($id) {
+			
+	}
+	public function Register($username, $password, $firstname, $lastname, $email) {
 		
 	}
 }

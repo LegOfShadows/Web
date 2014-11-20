@@ -1,5 +1,5 @@
 <?php
-class HomeController extends Controller {
+class HomeController extends lib\Controller {
 	public function index() {
 		$this->name = 'Home';
 		$this->view = 'Home\index';

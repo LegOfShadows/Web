@@ -4,7 +4,11 @@
  * @author Ivan
  *
  */
-class UserController extends Controller {
+class UserController extends lib\Controller {
+	public function __construct() {
+		$this->models[] = 'User';
+	}
+	
 	public function index() {
 		if (isset ( $session->user )) {
 		} else {
