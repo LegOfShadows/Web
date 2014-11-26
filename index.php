@@ -1,17 +1,16 @@
 <?php
-require_once('config.php');
+session_start ();
+require_once ('config.php');
 
 if (DEBUG_MODE == TRUE) {
-	Log::Add('DEBUG_MODE',TRUE);
-	Log::Add('Autoloader', spl_autoload_functions());
+	Log::Add ( 'DEBUG_MODE', TRUE );
+	Log::Add ( 'Autoloader', spl_autoload_functions () );
 }
 
-$session = new Session();
-$db = new Database();
+$router = new Router ();
 
-$url = $_SERVER['REQUEST_URI'];
-$router = new Router($url);
+// TEST AREA //
+Log::Add('Time',time());
+// END TEST AREA //
 
-Log::Add('SERVER',$_SERVER);
-
-$router->Route();
+$router->Route ();

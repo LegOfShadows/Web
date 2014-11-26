@@ -1,5 +1,5 @@
 <?php
-class Log {
+class Log extends Core {
 	/**
 	 * Logs variables into debug output;
 	 * @param string $name: Variable name;
@@ -15,7 +15,7 @@ class Log {
 				$GLOBALS ['debug'] .= $value;
 				break;
 			case 'array' :
-				
+			case 'object' :				
 				foreach ( $value as $key => $val ) {
 					Log::Add ( $key, $val, $indent + 20 );
 				}

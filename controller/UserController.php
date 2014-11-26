@@ -6,11 +6,11 @@
  */
 class UserController extends Controller {
 	public function __construct() {
-		$this->models[] = 'User';
+		$this->models [] = 'User';
+		parent::__construct ();
 	}
-	
 	public function index() {
-		if (isset ( $session->user )) {
+		if (isset ( $_SESSION ['user'] ['id'] )) {
 		} else {
 			header ( 'Location: /user/login' );
 		}
@@ -18,17 +18,25 @@ class UserController extends Controller {
 	public function edit() {
 	}
 	public function register() {
+		$this->SetFlash ( 'Success', 'Was @register' );
 	}
 	public function login() {
-		if (isset($_POST['username'])) {
-			$username = $_POST['username'];
-			$password = $_POST['password'];
+		if ($this->IsPost ()) {
+			$username = $_POST ['username'];
+			$password = $_POST ['password'];
+			if ($this->User->Validate ( 'username', $username ) && $this->User->Validate ( 'password', $password )) {
+				$this->User->Login ();
+			}
 		} else {
 			$this->name = 'Login';
 			$this->view = 'User\login';
+			Log::Add ( 'UserController', $this );
 			$this->ShowView ();
 		}
 	}
 	public function logout() {
+		unset ( $_SESSION ['User'] );
+		$this->SetFlash ( 'Logout', 'Successfully logged out' );
+		header ( 'Location: /user/login' );
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-class Router {
+class Router extends Core {
 	private $controller = 'home';
 	private $action = 'index';
 	private $param1 = false;
@@ -26,7 +26,8 @@ class Router {
 	 *
 	 * @param string $url        	
 	 */
-	public function __construct($url) {
+	public function __construct() {
+		$url = $_SERVER ['REQUEST_URI'];
 		$command = explode ( '/', $url );
 		$command = array_filter ( $command, "Router::RemoveEmpty" );
 		
@@ -55,6 +56,8 @@ class Router {
 		$action = $this->action;
 		// Initialize the routed Controller
 		$controller = new $class ();
+		// Load default Model for controller
+		
 		// Call controller Action
 		$controller->$action ( $this->param1, $this->param2 );
 	}
@@ -64,8 +67,7 @@ class Router {
 	 * @return string
 	 */
 	private function GetControllerClassName() {
-		$name = Core::Camelize ( $this->controller ) . 'Controller';
-		return $name;
+		return Str::Controller ( $this->controller );
 	}
 	/**
 	 * Removes all empty string items from array;

@@ -1,5 +1,5 @@
-<?php if (isset($user)) {?>
-	Welcome <?php echo $user?>
+<?php if (isset($_SESSION['User'])) {?>
+	Welcome <?php echo $_SESSION['User']['username']?>
 	<a class="ctrlSidebarLink" href="/user/logout">Logout</a>
 	<?php 
 } else {

@@ -1,38 +1,55 @@
 <?php
 /**
- * Core file for the Framework
- * Contains all the module loading and global functions
+ * Base Class for the Framework
+ * 
  * @author Ivan
  */
 class Core {
 	/**
 	 * File version
+	 *
 	 * @var string
 	 */
 	public $version = 'alpha 1.0';
+	
+	public function __construct() {
+	}
+	
 	/**
-	 * Capitalizes a given string
-	 * @param string $string
+	 * Returns the name of the class
 	 * @return string
 	 */
-	public static function Capitalize($string) {
-		$cap = strtoupper ( substr ( $string, 0, 1 ) );
-		$rest = strtolower ( substr ( $string, 1, strlen ( $string ) ) );
-		return $cap . $rest;
+	public function Name() {
+		return get_class($this);
+	}
+	
+	public function Handle() {
+		$self = &$this;
+		return $self;
+	}
+	
+	/**
+	 * Sets a flash message that will be displayed in the next view
+	 * @param string $title
+	 * @param string $msg
+	 */
+	public static function SetFlash($title, $msg) {
+		$_SESSION['flash'][$title] = $msg;
 	}
 	/**
-	 * Camelizes a string that is separated with undescores
-	 * or just capitalizes the string
-	 * @param string $string
-	 * @return string
+	 * Returns and purges the flash data
+	 * @return array
 	 */
-	public static function Camelize($string) {
-		$split = explode('_',$string);
-		$out = '';
-		foreach ($split as $str) {
-			$out .= Core::Capitalize($str);
-		}
-		return $out;
+	public static function GetFlash() {
+		$flash = $_SESSION['flash'];
+		unset ($_SESSION['flash']);
+		return $flash;
+	}
+	/**
+	 * Checks if there is any flash data
+	 * @return boolean
+	 */
+	public static function HasFlash() {			
+		return isset($_SESSION['flash']);
 	}
 }
-

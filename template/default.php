@@ -17,7 +17,7 @@
 				<?php echo $this->GetElement('menu')?>
 			</ul>
 		</div>
-		<?php echo $this->GetNotifications()?>
+		<?php echo $this->Flash()?>
 		<div id="wrpContent">
 			<div id="wrpTitle">
 				<h2><?php echo $this->title?></h2>

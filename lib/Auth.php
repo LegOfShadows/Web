@@ -4,12 +4,9 @@
  * @author Ivan
  *
  */
-class Auth {
+class Auth extends Core {
+	public $Levels = array('banned','basic','author','moderator','administrator');
 	public static function Encrypt($string) {
 		return sha1($string);
-	}
-	public static function ValidateUsername($string) {
-		$db->query('SELECT 1');
-		return $db->GetData();
 	}
 }

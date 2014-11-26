@@ -10,3 +10,14 @@ actionname {=viewname.php}
 names(plural)
 [DB Column]
 tablename(singular)_columnname
+
+
+[EXAMPLE]
+--USER--
+Model :: User
+Controller :: UserController
+Action :: index()
+View (dir) :: view/User/index.php
+
+MySQL Table :: users
+MySQL Collumn :: user_id
