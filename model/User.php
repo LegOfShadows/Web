@@ -1,7 +1,8 @@
 <?php
 class User extends Model {
 	public function Login() {
-		$id = $this->db->Result()[0][0];
+		$id = $this->db->Result();
+		$id = $id[0][0];
 		$this->Load ( $id );
 		$_SESSION['User'] = $this->properties;
 		$this->UpdateLastLogin();
@@ -13,7 +14,8 @@ class User extends Model {
 			case 'username' :
 				$query = 'SELECT user_id FROM users WHERE user_username = \'%s\'';
 				$query = sprintf ( $query, $value );
-				if ($this->db->Query ( $query )) {
+				$result = $this->db->Query ( $query );
+				if ($result->num_rows > 0) {
 					return true;
 				} else {
 					$this->SetFlash ( 'Invalid Username', 'Please make sure you\'ve entered the correct username' );
@@ -23,7 +25,8 @@ class User extends Model {
 			case 'password' :
 				$query = 'SELECT user_id FROM users WHERE user_password = \'%s\'';
 				$query = sprintf ( $query, Auth::Encrypt ( $value ) );
-				if ($this->db->Query ( $query )) {
+				$result = $this->db->Query ( $query );
+				if ($result->num_rows > 0) {
 					return true;
 				} else {
 					$this->SetFlash ( 'Invalid Password', 'Please make sure you\'ve entered the correct password and check Caps Lock' );

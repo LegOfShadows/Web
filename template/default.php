@@ -4,9 +4,8 @@
 	<title><?php echo APP_TITLE.': '.$this->title?></title>
 	<?php echo $this->GetStyles()?>
 </head>
-<body>
-	<div id="wrpSidebar">
-		<?php echo $this->GetElement('sidebar')?>
+<body class="fadeInDown animated">
+	<?php echo $this->GetElement('sidebar')?>
 	</div>
 	<div id="wrpMain">
 		<div id="wrpHeader">

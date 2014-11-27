@@ -10,9 +10,16 @@ class UserController extends Controller {
 		parent::__construct ();
 	}
 	public function index() {
-		if (isset ( $_SESSION ['user'] ['id'] )) {
+		if (isset ( $_SESSION ['User'] ['id'] )) {
+			$this->name='Index';
+			$this->view = 'User\index';
+			$userTable = array(array_keys($_SESSION['User']),array_values($_SESSION['User']));
+			
+			$this->data = array('UserInfo',$userTable);
+			Log::Add('Data',$this->data);
+			$this->ShowView();
 		} else {
-			header ( 'Location: /user/login' );
+			$this->Redirect('user/login');
 		}
 	}
 	public function edit() {
@@ -24,8 +31,11 @@ class UserController extends Controller {
 		if ($this->IsPost ()) {
 			$username = $_POST ['username'];
 			$password = $_POST ['password'];
-			if ($this->User->Validate ( 'username', $username ) && $this->User->Validate ( 'password', $password )) {
+			if ($this->User->Validate ( 'username', $username ) === true && $this->User->Validate ( 'password', $password ) === true) {
 				$this->User->Login ();
+				$this->Redirect('user/index');
+			} else {
+				$this->Redirect('user/login');
 			}
 		} else {
 			$this->name = 'Login';
@@ -37,6 +47,6 @@ class UserController extends Controller {
 	public function logout() {
 		unset ( $_SESSION ['User'] );
 		$this->SetFlash ( 'Logout', 'Successfully logged out' );
-		header ( 'Location: /user/login' );
+		$this->Redirect('home');
 	}
 }

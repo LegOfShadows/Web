@@ -73,7 +73,7 @@ h6 {
 }
 /* Main Wrappers */
 #wrpMain {
-	margin: 0px 400px;
+	margin: 0px 250px;
 	min-width: 600px;
 	background: none;
 }
@@ -122,6 +122,7 @@ h6 {
 	border: 2px solid #808080;
 	border-radius: 3px;
 	background: #fff;
+	overflow: auto;
 }
 #wrpFooter {
 	margin-bottom: 15px;
@@ -134,13 +135,16 @@ h6 {
 #wrpSidebar {
 	position:fixed;
 	margin-top: 75px;
-	margin-left: 175px;
+	margin-left: 15px;
 	padding: 15px;
 	width: 166px;
 	border: 2px solid #808080;
 	background: #fff;
 	border-radius: 3px;
+	/*opacity: 0.2;
+    filter: alpha(opacity=20); /* For IE8 and earlier */
 }
+
 
 /* Navigation */
 #ctrlMenu {
@@ -190,6 +194,7 @@ h6 {
 /* Item: Table */
 .ctrlItemTable {
 	width: 100%;
+	max-width: 100%;
 	border-collapse: collapse;
 	border: 2px solid #808080;
 }

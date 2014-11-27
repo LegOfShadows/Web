@@ -94,12 +94,14 @@ class Html extends Core {
 		}
 	}
 	/**
-	 * Sets the file path for the content element
-	 * 
+	 * Sets the file path for the view
 	 * @param string $name        	
 	 */
 	public function SetView($name) {
 		$this->view = VIEW_DIR . $name . '.php';
+	}
+	public function SetData($name, $data) {
+		$this->data[$name] = $data;	
 	}
 	public function CreateElement($tag,$text,$id=false,$class=false) {
 		$elem = '<'.$tag; 
@@ -111,5 +113,21 @@ class Html extends Core {
 		}
 		$elem .= '>'.$text.'</'.$tag.'>';
 		return $elem;
+	}
+	public function CreateTable($data,$id=false,$class=false,$header=false) {
+		$table = '';
+		foreach ($data as $row) {
+			$trow = '';
+			foreach ($row as $cell) {
+				$tag = 'td';
+				if ($header) {
+					$tag = 'th';
+				}
+				$trow .= $this->CreateElement($tag,$cell);
+			}
+			$header = false;
+			$table .= $this->CreateElement('tr',$trow);
+		}
+		return $this->CreateElement('table',$table,$id,$class);
 	}
 }

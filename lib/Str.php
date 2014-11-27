@@ -44,12 +44,13 @@ abstract class Str extends Core {
 		return Str::Camelize ( $string ) . 'Controller';
 	}
 	public static function ModelProperty($string) {
-		return explode ( '_', $string )[1];
+		$model = explode ( '_', $string );
+		return $model[1];
 	}
 	public static function TableCollumn($model, $property) {
-		return strtolower($model . '_' . $property);
+		return strtolower ( $model . '_' . $property );
 	}
 	public static function Timestamp($time) {
-		return date('Y-m-d H:i:s',$time);
+		return date ( 'Y-m-d H:i:s', $time );
 	}
 }

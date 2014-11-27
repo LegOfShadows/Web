@@ -19,8 +19,11 @@ class Controller extends Core {
 		}
 	}
 	public function ShowView() {
-		$html = new Html(Array('title'=>$this->name));
+		$html = new Html(Array('title'=>$this->name,'styles'=>array('/css/animate.css')));
 		$html->SetView($this->view);
+		if (isset($this->data)) {
+			$html->SetData($this->data[0],$this->data[1]);
+		}
 		$html->Render();
 	}
 	/**

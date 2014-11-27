@@ -52,4 +52,12 @@ class Core {
 	public static function HasFlash() {			
 		return isset($_SESSION['flash']);
 	}
+	/**
+	 * Redirects navigator to specified internal url
+	 * @param string $url
+	 */
+	public static function Redirect($url) {
+		$_SESSION['redirect_from'] = $_SERVER['REQUEST_URI'];
+		header('Location: /'.$url);
+	}
 }
