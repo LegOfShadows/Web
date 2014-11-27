@@ -74,3 +74,12 @@ function modelLoader($class) {
 spl_autoload_register ( 'libLoader' );
 spl_autoload_register ( 'modelLoader' );
 spl_autoload_register ( 'controllerLoader' );
+/**
+ * Define flash messages
+ */
+define('MSG_LOGIN_WRONG_PASSWORD','Please make sure you input the correct password');
+define('MSG_LOGIN_WRONG_USERNAME','This username was not found');
+define('MSG_LOGIN_SUCCESS','Login was successful, welcome!');
+define('MSG_LOGOUT_SUCCESS','Logged out successfully, see you soon!');
+
+

@@ -1,34 +1,32 @@
-<div id="wrpSidebar" class="fadeInLeft animated">
-<script type='text/javascript'>
-	document.getElementById('wrpSidebar').
+<div id="wrpSidebarShow">
+	<a class="ctrlSidebarLink" href="Javascript:void(0)"
+		onclick="showSidebar(this)">Sidebar</a>
+</div>
+<div id="wrpSidebar" class="wrpHidden">
+	<script type='text/javascript'>
+function hideSidebar(elem) {
+	elem.parentElement.className = 'fadeOutLeft animated';
+	document.getElementById('wrpSidebarShow').className = 'fadeInDown animated';
+}
+function showSidebar(elem) {
+	elem.parentElement.nextElementSibling.className = 'fadeInLeft animated';
+	document.getElementById('wrpSidebarShow').className = 'fadeOutUp animated';
+}
 </script>
 <?php if (isset($_SESSION['User'])) {?>
-	Welcome <?php echo $_SESSION['User']['username']?>
+	<a class="ctrlSidebarLink" href="/user/index"><?php echo $_SESSION['User']['username']?></a>
 	<a class="ctrlSidebarLink" href="/user/logout">Logout</a>
 	<?php
-	echo 'Status: ';
-	switch($_SESSION['User']['accesslevel']) {
-		case 4:
-			echo 'Admin';
-			break;
-		case 3:
-			echo 'Mod';
-			break;
-		case 2:
-			echo 'Author';
-			break;
-		case 1:
-			echo 'User';
-			break;
-		case 0:
-			echo 'Banned';
-			break;
-	}
-	echo '<br>';
-	echo 'Last Logon: '.$_SESSION['User']['lastlogon'];
+	$status = 'User Level: ' . Auth::GetAccessLevel ( $_SESSION ['User'] ['accesslevel'] );
+	echo Html::CreateElement ( 'div', $status, false, 'ctrlSidebarItem' );
+	$lastlogon = 'Last Logon: ' . Date::StrToDate ( $_SESSION ['User'] ['lastlogon'] );
+	echo Html::CreateElement ( 'div', $lastlogon, false, 'ctrlSidebarItem' );
 } else {
 	?>
-	<a class="ctrlSidebarLink" href="/user/login">Login</a>	
-	<a class="ctrlSidebarLink" href="/user/register">Register</a>
+	<a class="ctrlSidebarLink" href="/user/login">Login</a> <a
+		class="ctrlSidebarLink" href="/user/register">Register</a>
 <?php }?>
+	<hr>
+	<a class="ctrlSidebarLink" href="Javascript:void(0)"
+		onclick="hideSidebar(this)">Hide</a>
 </div>

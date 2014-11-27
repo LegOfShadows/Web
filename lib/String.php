@@ -1,5 +1,5 @@
 <?php
-abstract class Str extends Core {
+abstract class String extends Core {
 	/**
 	 * Capitalizes a string
 	 *
@@ -21,7 +21,7 @@ abstract class Str extends Core {
 		$split = explode ( '_', $string );
 		$out = '';
 		foreach ( $split as $str ) {
-			$out .= Str::Capitalize ( $str );
+			$out .= String::Capitalize ( $str );
 		}
 		return $out;
 	}
@@ -41,7 +41,10 @@ abstract class Str extends Core {
 	 * @return string
 	 */
 	public static function Controller($string) {
-		return Str::Camelize ( $string ) . 'Controller';
+		return String::Camelize ( $string ) . 'Controller';
+	}
+	public static function View($controller, $action) {
+		return String::Camelize($controller).DS.$action;
 	}
 	public static function ModelProperty($string) {
 		$model = explode ( '_', $string );

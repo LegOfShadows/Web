@@ -5,7 +5,11 @@
  *
  */
 class Auth extends Core {
-	public $Levels = array('banned','basic','author','moderator','administrator');
+	public static $Levels = array('banned','basic','author','moderator','administrator');
+	public static function GetAccessLevel($level) {
+		$array = Auth::$Levels;
+		return String::Capitalize($array[$level]);
+	}
 	public static function Encrypt($string) {
 		return sha1($string);
 	}

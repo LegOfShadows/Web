@@ -10,7 +10,7 @@ if (DEBUG_MODE == TRUE) {
 $router = new Router ();
 
 // TEST AREA //
-Log::Add('Time',time());
+//Log::Add('Time',date('Y-M-d', time()));
 // END TEST AREA //
 
 $router->Route ();

@@ -17,7 +17,7 @@ class Model extends Core {
 		$this->db->query ( $query );
 		$rows = $this->db->Result ();
 		foreach ( $rows as $row ) {
-			$this->properties [Str::ModelProperty ( $row [0] )] = null;
+			$this->properties [String::ModelProperty ( $row [0] )] = null;
 		}
 	}
 	/**
@@ -44,18 +44,18 @@ class Model extends Core {
 			$result = $this->db->Result ();
 			$this->SetProperties ( $result [0] );
 		} else {
-			Log::Add ( 'DB Warning', 'No such ID' );
+			$this->SetFlash( 'DB Warning', 'No such ID for '. $this->Name() );
 		}
 	}
 	public function TableCollumns() {
 		$out = '';
 		foreach ( $this->properties as $k => $v ) {
-			$out .= Str::TableCollumn ( $this->Name (), $k ) . ',';
+			$out .= String::TableCollumn ( $this->Name (), $k ) . ',';
 		}
 		return substr ( $out, 0, strlen ( $out ) - 1 );
 	}
 	public function IdCollumn() {
-		return Str::TableCollumn ( $this->Name (), 'id' );
+		return String::TableCollumn ( $this->Name (), 'id' );
 	}
 	public function Insert() {
 		$this->properties ['id'] = 0;

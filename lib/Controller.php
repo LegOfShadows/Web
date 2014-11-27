@@ -6,9 +6,11 @@
  */ 
 class Controller extends Core {
 	public $models;
+	public $view;
 	
 	public function __construct() {
 		$this->LoadModels();
+		$this->view = new View();
 	}
 	
 	public function LoadModels() {
@@ -17,14 +19,6 @@ class Controller extends Core {
 				$this->$model = new $model;
 			}
 		}
-	}
-	public function ShowView() {
-		$html = new Html(Array('title'=>$this->name,'styles'=>array('/css/animate.css')));
-		$html->SetView($this->view);
-		if (isset($this->data)) {
-			$html->SetData($this->data[0],$this->data[1]);
-		}
-		$html->Render();
 	}
 	/**
 	 * Checks if server request is POST

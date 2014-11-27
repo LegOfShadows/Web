@@ -52,22 +52,16 @@ class Router extends Core {
 	 * Default Action is always Index
 	 */
 	public function Route() {
-		$class = $this->GetControllerClassName ();
+		$class = String::Controller ( $this->controller );
 		$action = $this->action;
 		// Initialize the routed Controller
 		$controller = new $class ();
-		// Load default Model for controller
-		
+		// Set default values for controller
+		$controller->view->SetPath (String::View ( $this->controller, $this->action ));
+		$controller->view->title = String::Capitalize ( $this->controller );
 		// Call controller Action
 		$controller->$action ( $this->param1, $this->param2 );
-	}
-	/**
-	 * Gives the CamelCase Class name of the Controller parsed at construct
-	 *
-	 * @return string
-	 */
-	private function GetControllerClassName() {
-		return Str::Controller ( $this->controller );
+		$controller->view->Render();
 	}
 	/**
 	 * Removes all empty string items from array;

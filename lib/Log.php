@@ -15,7 +15,7 @@ class Log extends Core {
 				$GLOBALS ['debug'] .= $value;
 				break;
 			case 'array' :
-			case 'object' :				
+			case 'object' :			
 				foreach ( $value as $key => $val ) {
 					Log::Add ( $key, $val, $indent + 20 );
 				}

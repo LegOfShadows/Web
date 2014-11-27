@@ -73,8 +73,9 @@ h6 {
 }
 /* Main Wrappers */
 #wrpMain {
-	margin: 0px 250px;
+	margin: 0px auto;
 	min-width: 600px;
+	max-width: 1000px;
 	background: none;
 }
 #wrpHeader {
@@ -132,20 +133,26 @@ h6 {
 	border-radius: 3px;
 	background: #fff;
 }
-#wrpSidebar {
+#wrpSidebar,
+#wrpSidebarShow {
 	position:fixed;
-	margin-top: 75px;
-	margin-left: 15px;
-	padding: 15px;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	padding: 10px;
 	width: 166px;
-	border: 2px solid #808080;
+	border-right: 2px solid #808080;
 	background: #fff;
 	border-radius: 3px;
-	/*opacity: 0.2;
-    filter: alpha(opacity=20); /* For IE8 and earlier */
+	box-shadow: 3px 3px 5px;
 }
-
-
+#wrpSidebarShow {
+	bottom: auto;
+	border-bottom: 2px solid #808080;
+}
+.wrpHidden {
+	display: none;
+}
 /* Navigation */
 #ctrlMenu {
 	margin: 0px;
@@ -243,12 +250,31 @@ h6 {
 /* Item: Form */
 .ctrlItemForm input[type="text"],
 .ctrlItemForm input[type="password"],
+.ctrlItemForm input[type="button"],
+.ctrlItemForm input[type="submit"],
+.ctrlItemForm input[type="reset"],
 .ctrlItemForm select {
 	margin: 3px;
 	padding: 3px;
 	border: 1px solid #808080;
 	border-radius: 3px;
-	width: 256px;
+	width: 100%;
+}
+.ctrlItemForm input[type="button"]:hover,
+.ctrlItemForm input[type="submit"]:hover,
+.ctrlItemForm input[type="reset"]:hover {
+	background: #40a040;
+	cursor: pointer;
+}
+.ctrlRequired {
+	border-color: #f00 !important;
+}
+.ctrlItemFormTable {
+	width: 100%;
+}
+.ctrlItemFormTable td {
+	padding: 5px 10px;
+	text-align:right;
 }
 .ctrlItemFormGroup {
 	border: 1px solid #808080;
@@ -279,6 +305,11 @@ h6 {
 .ctrlSidebarLink:hover {
 	color: #fff;
 	background: #808080;
+}
+.ctrlSidebarItem {
+	margin: 5px;
+	padding: 5px;
+	font-size: 11px;
 }
 /* DEBUG */
 #wrpDebug {
