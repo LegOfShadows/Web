@@ -17,20 +17,21 @@ class View extends Core {
 	 */
 	public function AddData($array) {
 		$this->data = array_merge($array, $this->data);
-		Log::Add('View Data',$this->data);
 	}
 	/**
 	 * Assigns data array to individual variables for easier access;
 	 */
 	private function PrepareData() {
-		foreach ($this->data as $k => $v) {
-			$this->$k = $v;
-		}
+
 	}
 
 	public function Render() {
 		if ($this->ViewExists()) {
-			$this->PrepareData();
+			foreach ($this->data as $k => $v) {
+				global $$k;
+				$$k = $v;
+			}
+			//$this->PrepareData();
 			include TEMPLATE_DIR . 'default.php';
 		}
 	}
