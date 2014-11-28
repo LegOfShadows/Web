@@ -19,7 +19,7 @@ class User extends Model {
 		$pass = sha1 ( $data ['password1'] );
 		$email = $data ['email'];
 		
-		$query = 'INSERT INTO users (user_username, user_password, user_firstname, user_lastname, user_email)';
+		$query = 'INSERT INTO users (username, password, firstname, lastname, email)';
 		$query .= ' VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')';
 		$query = sprintf ( $query, $user, $pass, $first, $last, $email );
 		if ($this->db->Query ( $query )) {
@@ -31,7 +31,7 @@ class User extends Model {
 	public function Validate($property, $value) {
 		switch ($property) {
 			case 'username' :
-				$query = 'SELECT user_id FROM users WHERE user_username = \'%s\'';
+				$query = 'SELECT id FROM users WHERE username = \'%s\'';
 				$query = sprintf ( $query, $value );
 				$result = $this->db->Query ( $query );
 				if ($result->num_rows > 0) {
@@ -42,7 +42,7 @@ class User extends Model {
 				}
 				break;
 			case 'password' :
-				$query = 'SELECT user_id FROM users WHERE user_password = \'%s\'';
+				$query = 'SELECT id FROM users WHERE password = \'%s\'';
 				$query = sprintf ( $query, Auth::Encrypt ( $value ) );
 				$result = $this->db->Query ( $query );
 				if ($result->num_rows > 0) {
@@ -68,7 +68,7 @@ class User extends Model {
 					$this->SetFlash ( 'Password', MSG_REGISTER_PASS_MISSMATCH );
 					$verdict = false;
 				}
-				$query = 'SELECT user_id FROM users WHERE user_username = \'%s\' OR user_email = \'%s\'';
+				$query = 'SELECT id FROM users WHERE username = \'%s\' OR email = \'%s\'';
 				$query = sprintf ( $query, $value ['username'], $value ['email'] );
 				$result = $this->db->Query ( $query );
 				if ($result->num_rows > 0) {
@@ -80,7 +80,7 @@ class User extends Model {
 		}
 	}
 	private function UpdateLastLogin() {
-		$query = 'UPDATE users SET user_lastlogon = \'%s\' WHERE user_id = %d';
+		$query = 'UPDATE users SET lastlogon = \'%s\' WHERE id = %d';
 		$query = sprintf ( $query, String::Timestamp ( time () ), $this->properties ['id'] );
 		$this->db->Query ( $query );
 	}
@@ -92,13 +92,13 @@ class User extends Model {
 	public function ChangePassword($pass) {
 		$id = $this->properties ['id'];
 		$pass = sha1 ( $pass );
-		$query = 'UPDATE users SET user_password = \'%s\' WHERE user_id = %d';
+		$query = 'UPDATE users SET password = \'%s\' WHERE id = %d';
 		$query = sprintf ( $query, $pass, $id );
 		$this->db->Query ( $query );
 	}
 	public function ChangeAccessLevel($lvl) {
 		$id = $this->properties ['id'];
-		$query = 'UPDATE users SET user_accesslevel = %d WHERE user_id = %d';
+		$query = 'UPDATE users SET accesslevel = %d WHERE id = %d';
 		$query = sprintf ( $query, $lvl, $id );
 		$this->db->Query ( $query );
 	}

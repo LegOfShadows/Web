@@ -17,12 +17,12 @@ class Model extends Core {
 		$this->db->query ( $query );
 		$rows = $this->db->Result ();
 		foreach ( $rows as $row ) {
-			$this->properties [String::ModelProperty ( $row [0] )] = null;
+			$this->properties [$row [0]] = null;
 		}
 	}
 	/**
 	 * Sets properties to the model using an array
-	 * 
+	 *
 	 * @param array $array        	
 	 */
 	public function SetProperties($array) {
@@ -34,29 +34,27 @@ class Model extends Core {
 	}
 	/**
 	 * Loads one model from the database
-	 * 
+	 *
 	 * @param integer $id        	
 	 */
 	public function Load($id) {
-		$query = 'SELECT ' . $this->TableCollumns () . ' FROM ' . $this->Name () . 's WHERE ' . $this->IdCollumn () . ' = %d';
+		$query = 'SELECT ' . $this->TableCollumns () . ' FROM ' . $this->Name () . 's WHERE id = %d';
 		$query = sprintf ( $query, $id );
 		if ($this->db->Query ( $query )) {
 			$result = $this->db->Result ();
 			$this->SetProperties ( $result [0] );
 		} else {
-			$this->SetFlash( 'DB Warning', MSG_DB_ID_NOT_FOUND );
+			$this->SetFlash ( 'DB Warning', MSG_DB_ID_NOT_FOUND );
 		}
 	}
 	public function TableCollumns() {
 		$out = '';
 		foreach ( $this->properties as $k => $v ) {
-			$out .= String::TableCollumn ( $this->Name (), $k ) . ',';
+			$out .= $k . ',';
 		}
 		return substr ( $out, 0, strlen ( $out ) - 1 );
 	}
-	public function IdCollumn() {
-		return String::TableCollumn ( $this->Name (), 'id' );
-	}
+	// not used yet
 	public function Insert() {
 		$this->properties ['id'] = 0;
 		$query = 'INSERT INTO ' . $this->table_name . '(' . $this->TableCollumns () . ') VALUES (?' . str_repeat ( ',?', count ( $this->properties ) - 1 ) . ')';

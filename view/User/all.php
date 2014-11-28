@@ -1,6 +1,3 @@
-<?php
-	Log::Add('users',$Users);
-?>
 <table class="ctrlItemTable">
 	<tr>
 		<th>Username</th>
@@ -12,12 +9,12 @@
 	</tr>
 	<?php foreach ($Users as $user) {?>
 	<tr style="text-align:center;">
-		<td><?php echo $user['user_username']?></td>
-		<td><?php echo $user['user_firstname'].' '.$user['user_lastname']?></td>
-		<td><?php echo $user['user_email']?></td>
-		<td><?php echo Auth::GetAccessLevel($user['user_accesslevel'])?></td>
-		<td><?php echo $user['user_lastlogon']?></td>
-		<td><a href="/user/edit/<?php echo $user['user_id']?>">Edit</a></td>
+		<td><?php echo $user['username']?></td>
+		<td><?php echo $user['firstname'].' '.$user['lastname']?></td>
+		<td><?php echo $user['email']?></td>
+		<td><?php echo Auth::GetAccessLevel($user['accesslevel'])?></td>
+		<td><?php echo $user['lastlogon']?></td>
+		<td><a href="/user/edit/<?php echo $user['id']?>">Edit</a></td>
 	</tr>
 	<?php }?>
 </table>

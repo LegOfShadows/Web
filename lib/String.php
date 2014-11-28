@@ -46,10 +46,6 @@ abstract class String extends Core {
 	public static function View($controller, $action) {
 		return String::Camelize($controller).DS.$action;
 	}
-	public static function ModelProperty($string) {
-		$model = explode ( '_', $string );
-		return $model[1];
-	}
 	public static function TableCollumn($model, $property) {
 		return strtolower ( $model . '_' . $property );
 	}
