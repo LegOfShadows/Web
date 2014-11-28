@@ -30,6 +30,5 @@
 				<td colspan="2"><input type="submit" value="Register" /></td>
 			</tr>
 		</table>
-
 	</fieldset>
 </form>

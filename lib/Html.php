@@ -28,7 +28,7 @@ class Html extends Core {
 	public static function Flash() {
 		if (Core::HasFlash ()) {
 			$inner = '';
-			foreach ( $this->GetFlash () as $k => $v ) {
+			foreach ( Core::GetFlash () as $k => $v ) {
 				$inner .= Html::CreateElement ( 'span', $k, false, 'ctrlNotificationTitle' ) . ' : ';
 				$inner .= Html::CreateElement ( 'span', $v, false, 'ctrlNotificationText' ) . '<br>';
 			}
@@ -65,11 +65,11 @@ class Html extends Core {
 				if ($header) {
 					$tag = 'th';
 				}
-				$trow .= $this->CreateElement ( $tag, $cell );
+				$trow .= Html::CreateElement ( $tag, $cell );
 			}
 			$header = false;
-			$table .= $this->CreateElement ( 'tr', $trow );
+			$table .= Html::CreateElement ( 'tr', $trow );
 		}
-		return $this->CreateElement ( 'table', $table, $id, $class );
+		return Html::CreateElement ( 'table', $table, $id, $class );
 	}
 }
