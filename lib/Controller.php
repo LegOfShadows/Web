@@ -7,6 +7,7 @@
 class Controller extends Core {
 	public $models;
 	public $view;
+	public $auth = array();
 	
 	public function __construct() {
 		$this->LoadModels();

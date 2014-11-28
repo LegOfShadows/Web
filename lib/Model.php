@@ -44,7 +44,7 @@ class Model extends Core {
 			$result = $this->db->Result ();
 			$this->SetProperties ( $result [0] );
 		} else {
-			$this->SetFlash( 'DB Warning', 'No such ID for '. $this->Name() );
+			$this->SetFlash( 'DB Warning', MSG_DB_ID_NOT_FOUND );
 		}
 	}
 	public function TableCollumns() {

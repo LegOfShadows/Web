@@ -1,27 +1,31 @@
 <?php
 class User extends Model {
 	public function Login() {
-		$id = $this->db->Result();
-		$id = $id[0][0];
+		$id = $this->db->Result ();
+		$id = $id [0] [0];
 		$this->Load ( $id );
-		$_SESSION['User'] = $this->properties;
-		$this->SetFlash('Login', MSG_LOGIN_SUCCESS);
-		$this->UpdateLastLogin();
+		if ($this->properties ['accesslevel'] != 0) {
+			$_SESSION ['User'] = $this->properties;
+			$this->SetFlash ( 'Login', MSG_LOGIN_SUCCESS );
+			$this->UpdateLastLogin ();
+		} else {
+			$this->SetFlash ( 'Login', MSG_LOGIN_BANNED );
+		}
 	}
 	public function Register($data) {
-		$first = $data['firstname'];
-		$last = $data['lastname'];
-		$user = $data['username'];
-		$pass = sha1($data['password1']);
-		$email = $data['email'];
+		$first = $data ['firstname'];
+		$last = $data ['lastname'];
+		$user = $data ['username'];
+		$pass = sha1 ( $data ['password1'] );
+		$email = $data ['email'];
 		
 		$query = 'INSERT INTO users (user_username, user_password, user_firstname, user_lastname, user_email)';
 		$query .= ' VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')';
-		$query = sprintf($query,$user,$pass,$first,$last,$email);
-		if ($this->db->Query($query)) {
-			$this->SetFlash('Success','Registration complete');
+		$query = sprintf ( $query, $user, $pass, $first, $last, $email );
+		if ($this->db->Query ( $query )) {
+			$this->SetFlash ( 'Success', MSG_REGISTER_SUCCESS );
 		} else {
-			$this->SetFlash('Failure','There was an error during the process, please try again');
+			$this->SetFlash ( 'Failure', MSG_REGISTER_FAILURE );
 		}
 	}
 	public function Validate($property, $value) {
@@ -48,27 +52,27 @@ class User extends Model {
 					return false;
 				}
 				break;
-			case 'registration':
+			case 'registration' :
 				$verdict = true;
 				$missing = '';
-				foreach ($value as $k => $v) {
-					if (!isset($v) || $v === '') {
-						$missing .= $k.'; ';
+				foreach ( $value as $k => $v ) {
+					if (! isset ( $v ) || $v === '') {
+						$missing .= $k . '; ';
 						$verdict = false;
 					}
 				}
 				if ($verdict === false) {
-					$this->SetFlash('Missing',$missing);
+					$this->SetFlash ( 'Missing', $missing );
 				}
-				if ($value['password1'] !== $value['password2']){
-					$this->SetFlash('Password','Passwords don\'t match');
+				if ($value ['password1'] !== $value ['password2']) {
+					$this->SetFlash ( 'Password', MSG_REGISTER_PASS_MISSMATCH );
 					$verdict = false;
 				}
 				$query = 'SELECT user_id FROM users WHERE user_username = \'%s\' OR user_email = \'%s\'';
-				$query = sprintf($query,$value['username'],$value['email']);
-				$result = $this->db->Query ($query);
+				$query = sprintf ( $query, $value ['username'], $value ['email'] );
+				$result = $this->db->Query ( $query );
 				if ($result->num_rows > 0) {
-					$this->SetFlash('Not Unique','Username or email already in use');
+					$this->SetFlash ( 'Not Unique', MSG_REGISTER_NOT_UNIQUE );
 					$verdict = false;
 				}
 				return $verdict;
@@ -77,10 +81,25 @@ class User extends Model {
 	}
 	private function UpdateLastLogin() {
 		$query = 'UPDATE users SET user_lastlogon = \'%s\' WHERE user_id = %d';
-		$query = sprintf($query,String::Timestamp(time()), $this->properties['id']);
-		$this->db->Query($query);
+		$query = sprintf ( $query, String::Timestamp ( time () ), $this->properties ['id'] );
+		$this->db->Query ( $query );
 	}
-	public function TestInsert() {
-		$this->Insert ();
+	public function GetAll() {
+		$query = 'SELECT * FROM users';
+		$this->db->Query ( $query );
+		$this->all = $this->db->Result ( true );
+	}
+	public function ChangePassword($pass) {
+		$id = $this->properties ['id'];
+		$pass = sha1 ( $pass );
+		$query = 'UPDATE users SET user_password = \'%s\' WHERE user_id = %d';
+		$query = sprintf ( $query, $pass, $id );
+		$this->db->Query ( $query );
+	}
+	public function ChangeAccessLevel($lvl) {
+		$id = $this->properties ['id'];
+		$query = 'UPDATE users SET user_accesslevel = %d WHERE user_id = %d';
+		$query = sprintf ( $query, $lvl, $id );
+		$this->db->Query ( $query );
 	}
 }

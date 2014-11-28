@@ -5,7 +5,7 @@
 define ( 'DEBUG_MODE', TRUE );
 $GLOBALS ['debug'] = '';
 
-//Root and Directory Separator
+// Root and Directory Separator
 define ( 'ROOT', dirname ( __FILE__ ) );
 define ( 'DS', DIRECTORY_SEPARATOR );
 // CSS and JS
@@ -27,7 +27,9 @@ define ( 'DB_HOSTNAME', 'localhost' );
 define ( 'DB_USERNAME', 'http' );
 define ( 'DB_PASSWORD', 'werewolf' );
 define ( 'DB_PORT', 3306 );
-define ( 'DB_DATABASE', 'ss');
+define ( 'DB_DATABASE', 'ss' );
+// Authorization
+define ( 'AUTH_DEFAULT', 'allow' );
 // Autoloader
 /**
  * * nullify any existing autoloads **
@@ -77,9 +79,25 @@ spl_autoload_register ( 'controllerLoader' );
 /**
  * Define flash messages
  */
-define('MSG_LOGIN_WRONG_PASSWORD','Please make sure you input the correct password');
-define('MSG_LOGIN_WRONG_USERNAME','This username was not found');
-define('MSG_LOGIN_SUCCESS','Login was successful, welcome!');
-define('MSG_LOGOUT_SUCCESS','Logged out successfully, see you soon!');
+// Auth
+define ( 'MSG_LOGIN_REQUIRED', 'You must login before accessing this page' );
+// Login
+define ( 'MSG_LOGIN_WRONG_PASSWORD', 'Please make sure you input the correct password. Check if Caps Lock is ON' );
+define ( 'MSG_LOGIN_WRONG_USERNAME', 'This username was not found' );
+define ( 'MSG_LOGIN_SUCCESS', 'Login was successful, welcome!' );
+define ( 'MSG_LOGIN_BANNED', 'You are banned from the server. Contact an administrator for further information');
+// Logout
+define ( 'MSG_LOGOUT_SUCCESS', 'Logged out successfully, see you soon!' );
+// Register
+define ( 'MSG_REGISTER_SUCCESS', 'Registration complete' );
+define ( 'MSG_REGISTER_FAILURE', 'There was an error during the process, please try again later' );
+define ( 'MSG_REGISTER_PASS_MISSMATCH', 'The passwords do not match, please try again. Check if Caps Lock is ON' );
+define ( 'MSG_REGISTER_NOT_UNIQUE', 'This Username or Email is already used, please try another' );
+// User
+define ( 'MSG_USER_PASSWORD_CHANGED', 'Your password has been changed' );
+define ( 'MSG_USER_ACCESS_CHANGED', 'Access level changed' );
+define ( 'MSG_USER_ACCESS_LOW', 'You can only grant the same access level as yourself, not highier' );
+// Database
 
+define ( 'MSG_DB_ID_NOT_FOUND', 'ID wasn\'t found in the database' );
 

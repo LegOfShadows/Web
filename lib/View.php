@@ -2,9 +2,7 @@
 class View extends Core {
 	private $data = array();
 	private $path;
-	
-	private $doc;
-	
+
 	public function __construct($options = array()) {
 	}
 

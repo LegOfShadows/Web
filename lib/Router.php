@@ -11,7 +11,7 @@ class Router extends Core {
 	 */
 	private $actions = array (
 			'index',
-			'show',
+			'all',
 			'create',
 			'delete',
 			'edit',
@@ -56,6 +56,8 @@ class Router extends Core {
 		$action = $this->action;
 		// Initialize the routed Controller
 		$controller = new $class ();
+		// Check if Authorization is required;
+		Auth::RequiresLogin($this->action, $controller->auth);
 		// Set default values for controller
 		$controller->view->SetPath (String::View ( $this->controller, $this->action ));
 		$controller->view->title = String::Capitalize ( $this->controller );

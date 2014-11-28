@@ -14,6 +14,6 @@
 		<td><?php echo $UserInfo['lastlogon']?></td>
 	</tr>
 	<tr>
-		<td colspan="5"><a href="/user/edit">Edit Profile</a></td>
+		<td colspan="5"><a href="/user/edit/<?php echo $UserInfo['id']?>">Edit Profile</a></td>
 	</tr>
 </table>

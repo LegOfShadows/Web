@@ -59,5 +59,6 @@ class Core {
 	public static function Redirect($url) {
 		$_SESSION['redirect_from'] = $_SERVER['REQUEST_URI'];
 		header('Location: /'.$url);
+		die('Redirecting');
 	}
 }

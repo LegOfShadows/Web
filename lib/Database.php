@@ -22,20 +22,24 @@ class Database extends Core {
 		}
 	}
 	public function Query($query = false) {
-		$this->Reset();
+		$this->Reset ();
 		$this->result = $this->self->query ( $query );
-		$ok = ($this->result <> true ? $this->result->num_rows : $this->result);
+		$ok = ($this->result != true ? $this->result->num_rows : $this->result);
 		return $ok;
 	}
-	public function Result() {
-		return $this->result->fetch_all ();
+	public function Result($assoc = false) {
+		if ($assoc === true) {
+			return $this->result->fetch_all ( MYSQLI_ASSOC );
+		} else {
+			return $this->result->fetch_all ();
+		}
 	}
 	/**
 	 * Resets the result and statement and frees memory;
 	 */
 	public function Reset() {
 		if (isset ( $this->result )) {
-			if ($this->result <> true) {
+			if ($this->result != true) {
 				$this->result->free ();
 			}
 			unset ( $this->result );
