@@ -51,11 +51,11 @@ class UserController extends Controller {
 					$this->SetFlash ( 'Password Reset', 'Username ' . $this->User->properties ['username'] );
 				}
 				if ($newlevel != $this->User->properties ['accesslevel']) {
-					if ($newlevel > $_SESSION ['User'] ['accesslevel']) {
-						$this->SetFlash ( 'Access Level', MSG_USER_ACCESS_LOW );
-					} else {
+					if ($newlevel < $_SESSION ['User'] ['accesslevel'] && $_SESSION['User']['accesslevel'] > $this->User->properties['accesslevel']) {
 						$this->User->ChangeAccessLevel ( $newlevel );
 						$this->SetFlash ( 'Access Level', MSG_USER_ACCESS_CHANGED );
+					} else {
+						$this->SetFlash ( 'Access Level', MSG_USER_ACCESS_LOW );
 					}
 				}
 			} else {
