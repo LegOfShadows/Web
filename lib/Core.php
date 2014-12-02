@@ -10,7 +10,9 @@ class Core {
 	 *
 	 * @var string
 	 */
-	public $version = 'alpha 1.0';
+	public function Version() {
+		return 'alpha 1.0';
+	}
 	
 	public function __construct() {
 	}

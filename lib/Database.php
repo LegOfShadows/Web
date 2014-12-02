@@ -1,55 +1,27 @@
 <?php
 /**
- * Provides a connector to the database
+ * Provides a connector to the database using PDO
  * setup in config or provided as an options array
  * @author Ivan
  *
  */
-class Database extends Core {
-	private $self;
-	private $result;
+class Database extends Singleton {
+	// Connection
+	public $con;
 	/**
 	 * Constructor for the Database Handler Class
 	 *
 	 * @param array $options:
 	 *        	Options array containing host, user, pass, db
 	 */
-	public function __construct($options = false) {
-		if ($options != false) {
-			$this->self = new mysqli ( $options ['host'], $options ['user'], $options ['pass'], $options ['db'] );
-		} else {
-			$this->self = new mysqli ( DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT );
-		}
-	}
-	public function Query($query = false) {
-		$this->Reset ();
-		$this->result = $this->self->query ( $query );
-		$ok = ($this->result != true ? $this->result->num_rows : $this->result);
-		return $ok;
-	}
-	public function Result($assoc = false) {
-		if ($assoc === true) {
-			return $this->result->fetch_all ( MYSQLI_ASSOC );
-		} else {
-			return $this->result->fetch_all ();
-		}
-	}
-	/**
-	 * Resets the result and statement and frees memory;
-	 */
-	public function Reset() {
-		if (isset ( $this->result )) {
-			if ($this->result != true) {
-				$this->result->free ();
-			}
-			unset ( $this->result );
-		}
+	public function __construct() {
+		// Default connection from config.php
+		$dsn = 'mysql:host=' . DB_HOSTNAME . ';dbname=' . DB_DATABASE;
+		$this->con = new PDO ( $dsn, DB_USERNAME, DB_PASSWORD );
 	}
 	/**
 	 * Closes the DB connection when class is destroyed
 	 */
 	public function __destruct() {
-		$this->Reset ();
-		$this->self->close ();
 	}
 }

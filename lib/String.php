@@ -8,7 +8,7 @@ abstract class String extends Core {
 	 */
 	public static function Capitalize($string) {
 		$cap = strtoupper ( substr ( $string, 0, 1 ) );
-		$rest = strtolower ( substr ( $string, 1, strlen ( $string ) ) );
+		$rest = String::Lower ( substr ( $string, 1, strlen ( $string ) ) );
 		return $cap . $rest;
 	}
 	/**
@@ -44,12 +44,21 @@ abstract class String extends Core {
 		return String::Camelize ( $string ) . 'Controller';
 	}
 	public static function View($controller, $action) {
-		return String::Camelize($controller).DS.$action;
+		return String::Camelize ( $controller ) . DS . $action;
 	}
 	public static function TableCollumn($model, $property) {
 		return strtolower ( $model . '_' . $property );
 	}
 	public static function Timestamp($time) {
 		return date ( 'Y-m-d H:i:s', $time );
+	}
+	public static function Lower($string) {
+		return strtolower ( $string );
+	}
+	public static function Table($string) {
+		return String::Lower ( $string ) . 's';
+	}
+	public static function TrimLast($string) {
+		return substr ( $string, 0, strlen ( $string ) - 1 );
 	}
 }

@@ -28,7 +28,7 @@ class User extends Model {
 			$this->SetFlash ( 'Failure', MSG_REGISTER_FAILURE );
 		}
 	}
-	public function Validate($property, $value) {
+	/*public function Validate($property, $value) {
 		switch ($property) {
 			case 'username' :
 				$query = 'SELECT id FROM users WHERE username = \'%s\'';
@@ -78,7 +78,7 @@ class User extends Model {
 				return $verdict;
 				break;
 		}
-	}
+	}*/
 	private function UpdateLastLogin() {
 		$query = 'UPDATE users SET lastlogon = \'%s\' WHERE id = %d';
 		$query = sprintf ( $query, String::Timestamp ( time () ), $this->properties ['id'] );
