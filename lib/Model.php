@@ -9,7 +9,6 @@ class Model extends Core {
 	public function Load($id) {
 		$db = Database::getInstance ();
 		$query = 'SELECT * FROM ' . String::Lower ( $this->Name () ) . 's WHERE id=:id';
-		var_dump ( $query );
 		$stm = $db->con->prepare ( $query );
 		$params = array (
 				':id' => $id 
@@ -19,8 +18,10 @@ class Model extends Core {
 			foreach ( $stm->fetch ( PDO::FETCH_NAMED ) as $k => $v ) {
 				$this->$k = $v;
 			}
+			return true;
 		} else {
 			Log::Add ( 'DB Failure', $this->Name () . ' was not found' );
+			return false;
 		}
 	}
 	public function Save() {
@@ -33,15 +34,16 @@ class Model extends Core {
 		}
 		if ($stm->execute ()) {
 			Log::Add ( 'DB Success', $this->Name () . ' was saved' );
+			return true;
 		} else {
 			Log::Add ( 'DB Failure', $this->Name () . ' was not saved' );
+			return false;
 		}
 	}
 	public function Create() {
 		$this->id = null;
 		$this->created = 0;
 		$this->modified = 0;
-		$this->lastlogon = 0;
 		
 		$db = Database::getInstance ();
 		$query = $this->QueryInsert ();
@@ -52,10 +54,11 @@ class Model extends Core {
 		}
 		if ($stm->execute ()) {
 			Log::Add ( 'DB Success', $this->Name () . ' was created' );
+			return true;
 		} else {
 			Log::Add ( 'DB Failure', $this->Name () . ' was not created' );
+			return false;
 		}
-		var_dump ( $stm->fetchAll () );
 	}
 	public function Delete($id) {
 		$db = Database::getInstance ();
@@ -68,8 +71,10 @@ class Model extends Core {
 		);
 		if ($stm->execute ( $params )) {
 			Log::Add ( 'DB Success', $this->Name () . ' record was deleted' );
+			return true;
 		} else {
 			Log::Add ( 'DB Failure', $this->Name () . ' record was not deleted' );
+			return false;
 		}
 	}
 	public function All($start = false, $count = false) {
@@ -85,6 +90,7 @@ class Model extends Core {
 			return $stm->fetchAll ( PDO::FETCH_ASSOC );
 		} else {
 			Log::Add ( 'DB Failure', $this->Name () . ' list not found' );
+			return false;
 		}
 	}
 	public function Exists($field, $value) {

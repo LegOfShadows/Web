@@ -18,10 +18,10 @@ class UserController extends Controller {
 		parent::__construct ();
 	}
 	public function index() {
-		if (isset ( $_SESSION ['User'] ['id'] )) {
+		if (isset ( $_SESSION ['User']->id)) {
 			$this->view->title = 'Profile';
 			$this->view->AddData ( array (
-					'UserInfo' => $_SESSION ['User'] 
+					'User' => $_SESSION ['User']
 			) );
 		} else {
 			$this->Redirect ( 'user/login' );
