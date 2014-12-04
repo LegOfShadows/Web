@@ -10,6 +10,13 @@ class ForumController extends Controller {
 		);
 		parent::__construct ();
 	}
-	public function index() {
+	public function index($id = false) {
+		if ($id == false) {
+			$cat = array('categories'=>$this->Thread->GetCategories());
+			$this->view->AddData($cat);
+		} else {
+			$threads = array('threads'=>$this->Thread->GetThreadsByCategory($id));
+			$this->view->AddData($threads);
+		}
 	}
 }
