@@ -14,16 +14,16 @@ function showSidebar(elem) {
 }
 </script>
 <?php if (isset($_SESSION['User'])) {?>
-	<a class="ctrlSidebarLink" href="/user/index"><?php echo $_SESSION['User']['username']?></a>
+	<a class="ctrlSidebarLink" href="/user/index"><?php echo $_SESSION['User']->username?></a>
 	<a class="ctrlSidebarLink" href="/user/logout">Logout</a>
 	<?php if (Auth::Check(3)) {?>
 	<hr>
 	<a class="ctrlSidebarLink" href="/user/all">User List</a>
 	<hr>
 	<?php }
-	$status = 'User Level: ' . Auth::GetAccessLevel ( $_SESSION ['User'] ['accesslevel'] );
+	$status = 'User Level: ' . Auth::AccessLevel ( $_SESSION ['User']->accesslevel );
 	echo Html::CreateElement ( 'div', $status, false, 'ctrlSidebarItem' );
-	$lastlogon = 'Last Logon: ' . Date::StrToDate ( $_SESSION ['User'] ['lastlogon'] );
+	$lastlogon = 'Last Logon: ' . Date::StrToDate ( $_SESSION ['User']->lastlogon );
 	echo Html::CreateElement ( 'div', $lastlogon, false, 'ctrlSidebarItem' );
 } else {
 	?>

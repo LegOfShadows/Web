@@ -12,7 +12,7 @@
 		<td><?php echo $user['username']?></td>
 		<td><?php echo $user['firstname'].' '.$user['lastname']?></td>
 		<td><?php echo $user['email']?></td>
-		<td><?php echo Auth::GetAccessLevel($user['accesslevel'])?></td>
+		<td><?php echo Auth::AccessLevel($user['accesslevel'])?></td>
 		<td><?php echo $user['lastlogon']?></td>
 		<td><a href="/user/edit/<?php echo $user['id']?>">Edit</a></td>
 	</tr>

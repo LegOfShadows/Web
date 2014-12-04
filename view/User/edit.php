@@ -1,6 +1,5 @@
-<?php $id = $UserInfo['id']?>
 <?php
-
+$id = $User->id;
 if (Auth::Check ( 3 )) {
 	?>
 <form class="ctrlItemForm" action="/user/edit/<?php echo $id?>"
@@ -12,15 +11,15 @@ if (Auth::Check ( 3 )) {
 		<table class="ctrlItemFormTable">
 			<tr>
 				<td>Username</td>
-				<td><?php echo $UserInfo['username']?></td>
+				<td><?php echo $User->username?></td>
 			</tr>
 			<tr>
 				<td>Full Name</td>
-				<td><?php echo $UserInfo['firstname']?> <?php echo $UserInfo['lastname']?></td>
+				<td><?php echo $User->firstname?> <?php echo $User->lastname?></td>
 			</tr>
 			<tr>
 				<td>Email</td>
-				<td><?php echo $UserInfo['email']?></td>
+				<td><?php echo $User->email?></td>
 			</tr>
 			<tr>
 				<td><label>Reset Password</label></td>
@@ -32,7 +31,7 @@ if (Auth::Check ( 3 )) {
 					<?php
 	foreach ( Auth::$Levels as $k => $v ) {
 		echo "<option value='$k'";
-		if ($UserInfo ['accesslevel'] == $k) {
+		if ($User->accesslevel == $k) {
 			echo ' selected';
 		}
 		echo ">$v</option>";
@@ -46,7 +45,7 @@ if (Auth::Check ( 3 )) {
 		</table>
 	</fieldset>
 </form>
-<?php } if ($_SESSION['User']['id'] == $id) {?>
+<?php } if ($_SESSION['User']->id == $id) {?>
 <form class="ctrlItemForm" action="/user/edit/<?php echo $id?>"
 	method="POST">
 	<input type="hidden" name="id" value="<?php echo $id?>" /> <input

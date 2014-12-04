@@ -8,12 +8,12 @@ class Model extends Core {
 	}
 	public function Load($id) {
 		$db = Database::getInstance ();
-		$query = 'SELECT * FROM ' . String::Lower ( $this->Name () ) . 's WHERE id=:id';
+		$query = 'SELECT * FROM ' . String::Table ( $this->Name () ) . ' WHERE id=:id';
 		$stm = $db->con->prepare ( $query );
 		$params = array (
 				':id' => $id 
 		);
-		if ($stm->execute ()) {
+		if ($stm->execute ( $params )) {
 			Log::Add ( 'DB Success', $this->Name () . ' was found' );
 			foreach ( $stm->fetch ( PDO::FETCH_NAMED ) as $k => $v ) {
 				$this->$k = $v;
@@ -93,27 +93,44 @@ class Model extends Core {
 			return false;
 		}
 	}
-	public function Exists($field, $value) {
+	/**
+	 * Checks if an ID with given parameters exists in database
+	 * $check contains values passed to the WHERE statement
+	 *
+	 * @param array $check
+	 *        	:: 'field' = 'value'
+	 * @return unknown|boolean
+	 */
+	public function Exists($check) {
 		$db = Database::getInstance ();
 		$query = 'SELECT id FROM ';
 		$query .= String::Table ( $this->Name () );
 		$query .= ' WHERE ';
-		$query .= $field;
-		$query .= '=:value';
+		$first = true;
+		$params = array ();
+		foreach ( $check as $k => $v ) {
+			if ($first != true) {
+				$query .= ' AND ';
+			}
+			$a = ':' . $k; // Placeholder
+			$query .= $k . '=' . $a; // Assign 'field'='value'
+			$params [$a] = $v; // Assign parameter for execution
+			$first = false;
+		}
 		$stm = $db->con->prepare ( $query );
-		$params = array (
-				':value' => $value 
-		);
-		if ($stm->execute($params)) {
-			if ($stm->rowCount() <> 0) {
-				Log::Add('DB Success',$this->Name() . ' does exist');
-				return true;
+		Log::Add ( 'Query', $query );
+		Log::Add ( 'Params', $params );
+		if ($stm->execute ( $params )) {
+			if ($stm->rowCount () != 0) {
+				Log::Add ( 'DB Success', $this->Name () . ' does exist' );
+				$id = $stm->fetchColumn ();
+				return $id;
 			} else {
-				Log::Add('DB Success',$this->Name() . ' does not exist');
+				Log::Add ( 'DB Success', $this->Name () . ' does not exist' );
 				return false;
 			}
 		} else {
-			Log::Add('DB Failure',$this->Name() . ' error in query');
+			Log::Add ( 'DB Failure', $this->Name () . ' error in query' );
 			return false;
 		}
 	}

@@ -5,14 +5,14 @@
  *
  */
 class Auth extends Core {
-	public static $Levels = array('banned','basic','author','moderator','administrator');
+	public static $Levels = array('banned','basic','author','moderator','administrator','master');
 	/**
 	 * Checks if current user's level is at least equal to $level
 	 * @param unknown $level
 	 * @return boolean
 	 */
 	public static function Check($level) {
-		return ($_SESSION['User']['accesslevel'] >= $level ? true : false);
+		return ($_SESSION['User']->accesslevel >= $level ? true : false);
 	}
 	/**
 	 * Returns string equivalent of user's Access Level
@@ -45,7 +45,7 @@ class Auth extends Core {
 		if (key_exists($action,$array)) {
 			$access = $array[$action];	
 		}
-		if ($access == 'deny' && !isset($_SESSION['User']['id'])) {
+		if ($access == 'deny' && !isset($_SESSION['User']->id)) {
 			Core::SetFlash('Login required',MSG_LOGIN_REQUIRED);
 			Core::Redirect('user/login');
 		}
