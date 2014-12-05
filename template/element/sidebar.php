@@ -1,16 +1,16 @@
 <div id="wrpSidebarShow">
 	<a class="ctrlSidebarLink" href="Javascript:void(0)"
-		onclick="showSidebar(this)">Sidebar</a>
+		onclick="showSidebar(this)">>></a>
 </div>
 <div id="wrpSidebar" class="wrpHidden">
 	<script type='text/javascript'>
 function hideSidebar(elem) {
 	elem.parentElement.className = 'fadeOutLeft animated';
-	document.getElementById('wrpSidebarShow').className = 'fadeInDown animated';
+	document.getElementById('wrpSidebarShow').className = 'fadeInLeft animated';
 }
 function showSidebar(elem) {
 	elem.parentElement.nextElementSibling.className = 'fadeInLeft animated';
-	document.getElementById('wrpSidebarShow').className = 'fadeOutUp animated';
+	document.getElementById('wrpSidebarShow').className = 'fadeOutLeft animated';
 }
 </script>
 <?php if (isset($_SESSION['User'])) {?>

@@ -147,8 +147,11 @@ h6 {
 	box-shadow: 3px 3px 5px;
 }
 #wrpSidebarShow {
+	top: 10%;
 	bottom: auto;
-	border-bottom: 2px solid #808080;
+	width: 50px;
+	border: 2px solid #808080;
+	border-left: 0px;
 }
 .wrpHidden {
 	display: none;
