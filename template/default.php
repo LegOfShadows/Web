@@ -5,14 +5,16 @@
 	<?php
 	Html::Style ( CSS_DEFAULT );
 	Html::Style ( CSS_DIR . 'animate.css' );
+	Html::Style ( CSS_DIR . 'forum.css' )
 	?>
 </head>
 <body>
-	<?php echo Html::GetElement('sidebar')?>
+	<?php //echo Html::GetElement('sidebar')?>
 	</div>
 	<div id="wrpMain">
 		<div id="wrpHeader">
 			<h1><?php echo APP_TITLE?></h1>
+			<?php echo Html::GetElement('userbar')?>
 		</div>
 		<div id="wrpNavigation">
 			<ul id="ctrlMenu">

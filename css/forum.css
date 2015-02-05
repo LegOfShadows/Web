@@ -1,0 +1,76 @@
+@CHARSET "ISO-8859-1";
+
+.ctrlForumFloatRight {
+	float: right;
+}
+
+.ctrlForumFloatLeft {
+	float: left;
+}
+
+.ctrlForumClear {
+	clear: both;
+}
+
+.ctrlForumPost {
+	margin-bottom: 5px;
+	border: 2px solid #808080;
+	border-radius: 3px;
+}
+
+.ctrlForumPostAuthor {
+	float: left;
+	padding: 10px;
+	width: 150px;
+	background: #404040;
+	border-right: 2px solid #808080;
+	text-align:center;
+}
+
+.ctrlForumUser {
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+}
+
+.ctrlForumLevel {
+	font-size: 13px;
+	color: #f0a040;
+}
+
+.ctrlForumDate {
+	font-size: 9px;
+	color: #fff;
+}
+
+.ctrlForumPostBody {
+	float: left;
+	margin: 0px 15px 0px 10px;
+	padding: 5px;
+	background: #fff;
+}
+
+.ctrlCenterText {
+	margin: 0px;
+	text-align: center !important;
+}
+
+.wrpForumPostOuter {
+	padding: 10px;
+	border-radius: 3px;
+	background: #a0a0a0;
+}
+
+.wrpForumPostInner {
+	/* Blank */
+}
+
+.ctrlForumTextarea {
+	margin: 0px;
+	padding-top: 3px;
+	border: 0px;
+	width: 100%;
+	max-width: 100%;
+	min-width: 100%;
+	min-height: 200px;
+}

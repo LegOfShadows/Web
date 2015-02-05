@@ -51,7 +51,7 @@ class UserController extends Controller {
 					// Check if password reset was checked
 					if (isset ( $_POST ['password_reset'] )) {
 						$this->User->ChangePassword ( '' );
-						$this->SetFlash ( 'Password Reset', 'Username ' . $this->User->properties ['username'] );
+						$this->SetFlash ( 'Password Reset', 'Username ' . $this->User->username );
 					}
 					// Check if the level was changed
 					if ($newlevel != $this->User->accesslevel) {

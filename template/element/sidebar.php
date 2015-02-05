@@ -20,11 +20,17 @@ function showSidebar(elem) {
 	<hr>
 	<a class="ctrlSidebarLink" href="/user/all">User List</a>
 	<hr>
-	<?php }
+	<?php
+	
+}
 	$status = 'User Level: ' . Auth::AccessLevel ( $_SESSION ['User']->accesslevel );
-	echo Html::CreateElement ( 'div', $status, false, 'ctrlSidebarItem' );
+	echo Html::CreateElement ( 'div', $status, array (
+			'class' => 'ctrlSidebarItem' 
+	) );
 	$lastlogon = 'Last Logon: ' . Date::StrToDate ( $_SESSION ['User']->lastlogon );
-	echo Html::CreateElement ( 'div', $lastlogon, false, 'ctrlSidebarItem' );
+	echo Html::CreateElement ( 'div', $lastlogon, array (
+			'class' => 'ctrlSidebarItem' 
+	) );
 } else {
 	?>
 	<a class="ctrlSidebarLink" href="/user/login">Login</a> <a

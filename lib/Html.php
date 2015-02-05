@@ -29,10 +29,16 @@ class Html extends Core {
 		if (Core::HasFlash ()) {
 			$inner = '';
 			foreach ( Core::GetFlash () as $k => $v ) {
-				$inner .= Html::CreateElement ( 'span', $k, false, 'ctrlNotificationTitle' ) . ' : ';
-				$inner .= Html::CreateElement ( 'span', $v, false, 'ctrlNotificationText' ) . '<br>';
+				$inner .= Html::CreateElement ( 'span', $k, array (
+						'class' => 'ctrlNotificationTitle' 
+				) ) . ' : ';
+				$inner .= Html::CreateElement ( 'span', $v, array (
+						'class' => 'ctrlNotificationText' 
+				) ) . '<br>';
 			}
-			$outer = Html::CreateElement ( 'div', $inner, 'wrpNotification' );
+			$outer = Html::CreateElement ( 'div', $inner, array (
+					'id' => 'wrpNotification' 
+			) );
 			echo $outer;
 		}
 	}
@@ -44,19 +50,20 @@ class Html extends Core {
 	public static function GetElement($name) {
 		include ELEMENT_DIR . $name . '.php';
 	}
-
-	public static function CreateElement($tag, $text, $id = false, $class = false) {
+	public static function CreateElement($tag, $text, $options = array()) {
 		$elem = '<' . $tag;
-		if ($id != false) {
-			$elem .= ' id="' . $id . '"';
-		}
-		if ($class != false) {
-			$elem .= ' class="' . $class . '"';
+		foreach ( $options as $k => $v ) {
+			$elem .= " $k=\"$v\"";
 		}
 		$elem .= '>' . $text . '</' . $tag . '>';
 		return $elem;
 	}
-	public static function CreateTable($data, $id = false, $class = false, $header = false) {
+	public static function CreateLink($text, $url, $options = array()) {
+		$options['href'] = $url;
+		$link = Html::CreateElement('a',$text,$options);
+		return $link;
+	}
+	public static function CreateTable($data, $header = false, $options ) {
 		$table = '';
 		foreach ( $data as $row ) {
 			$trow = '';
@@ -70,6 +77,6 @@ class Html extends Core {
 			$header = false;
 			$table .= Html::CreateElement ( 'tr', $trow );
 		}
-		return Html::CreateElement ( 'table', $table, $id, $class );
+		return Html::CreateElement ( 'table', $table, $options );
 	}
 }

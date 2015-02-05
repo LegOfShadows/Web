@@ -1,0 +1,88 @@
+<html>
+<head>
+<style>
+html, body {
+	margin: 0px;
+	padding: 15px;
+	font-size: 19px;
+	font-family: Helvetica;
+}
+
+h4 {
+	
+}
+h1 {
+	font-style: italic;
+	text-decoration: underline;
+}
+
+table {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	width: 100%;
+	border-collapse: collapse;
+}
+#phone {
+	margin-left: 75px;
+}
+th {
+	border-bottom: 1px solid #aaa;
+	text-align: left;
+}
+td {
+	padding: 5px;
+}
+.ralign {
+	text-align: right;
+}
+.lalign {
+	text-align: left;
+}
+.bold {
+	font-weight: bold;
+}
+.uline {
+	text-decoration: underline;
+}
+.space {
+	height: 50px;
+}
+</style>
+</head>
+<body>
+<h4>Invoice BC$invNum</h4>
+<h1>Benoit Courville</h1>
+<div>
+	<a href="mailto:benoit.courville@outlook.com">benoit.courville@outlook.com</a>
+	<span id="phone">(514) 358-3701</span>
+</div>
+<div>18372 Amalfi, Pierrefonds, Quebec, Canada</div>
+<div class="space"></div>
+<div>Invoice Period: ending $date</div>
+<div>Invoiced to: Synergy Cycle -- <a href="mailto:info@synergycycle.ca">info@synergycycle.ca</a></div>
+
+<table>
+	<tr>
+		<th>Quantity</th>
+		<th>Description of Items Invoiced</th>
+		<th>Price</th>
+		<th>Total</th>
+	</tr>
+	<tr>
+		<td>$qty</td>
+		<td>x 1 Hour of Mechanical Service for Bicyles + Management Assitance</td>
+		<td>$$cost</td>
+		<td>$$total</td>
+	</tr>
+	<tr class="bold">
+		<td class="ralign" colspan="3">Grand Total</td>
+		<td class="lalign">$$total</td>
+	</tr>
+</table>
+
+<div class="ralign uline" >Invoice Status:<span class="bold">UNPAID</span></div>
+<div class="ralign">Merci!</div>
+<div class="ralign">Benoit Courville</div>
+
+</body>
+</html>

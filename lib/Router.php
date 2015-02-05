@@ -18,7 +18,9 @@ class Router extends Core {
 			'test',
 			'login',
 			'logout',
-			'register' 
+			'register',
+			'thread',
+			'post',
 	);
 	/**
 	 * Construct of Router class;
@@ -28,9 +30,11 @@ class Router extends Core {
 	 */
 	public function __construct() {
 		$url = $_SERVER ['REQUEST_URI'];
+		if (stripos($url, '?')> 0) {
+			$url = substr($url,0,stripos($url, '?'));
+		}
 		$command = explode ( '/', $url );
 		$command = array_filter ( $command, "Router::RemoveEmpty" );
-		
 		if (isset ( $command [1] )) {
 			$this->controller = $command [1];
 		}
@@ -42,6 +46,9 @@ class Router extends Core {
 		}
 		if (isset ( $command [4] )) {
 			$this->param2 = $command [4];
+		}
+		if (isset ($_GET) && count($_GET) > 0) {
+			$_POST['get'] = $_GET;
 		}
 	}
 	/**

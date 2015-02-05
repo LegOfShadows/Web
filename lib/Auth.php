@@ -5,49 +5,66 @@
  *
  */
 class Auth extends Core {
-	public static $Levels = array('banned','basic','author','moderator','administrator','master');
+	public static $Levels = array (
+			'banned',
+			'basic',
+			'author',
+			'moderator',
+			'administrator',
+			'master' 
+	);
 	/**
 	 * Checks if current user's level is at least equal to $level
-	 * @param unknown $level
+	 * 
+	 * @param unknown $level        	
 	 * @return boolean
 	 */
 	public static function Check($level) {
-		return ($_SESSION['User']->accesslevel >= $level ? true : false);
+		if (isset ( $_SESSION ['User'] )) {
+			return ($_SESSION ['User']->accesslevel >= $level ? true : false);
+		} else {
+			return false;
+		}
 	}
 	/**
 	 * Returns string equivalent of user's Access Level
-	 * @param integer $level
+	 * 
+	 * @param integer $level        	
 	 * @return string
 	 */
 	public static function AccessLevel($level) {
 		$array = Auth::$Levels;
-		return String::Capitalize($array[$level]);
+		return String::Capitalize ( $array [$level] );
 	}
 	/**
 	 * Returns the encrypted SHA1 string (CHAR(40))
-	 * @param input $string
+	 * 
+	 * @param input $string        	
 	 * @return string HASH
 	 */
 	public static function Encrypt($string) {
-		return sha1($string);
+		return sha1 ( $string );
 	}
 	/**
 	 * Checks if a page requires login to use
 	 * Redirects the user to the login page if check fails
-	 * @param Controller Action $action
-	 * @param Access Settings $array :: 'action' => 'allow'||'deny';
+	 * 
+	 * @param
+	 *        	Controller Action $action
+	 * @param
+	 *        	Access Settings $array :: 'action' => 'allow'||'deny';
 	 */
 	public static function RequiresLogin($action, $array) {
 		$access = AUTH_DEFAULT;
-		if (isset($array['all'])) {
-			$access = $array['all'];
+		if (isset ( $array ['all'] )) {
+			$access = $array ['all'];
 		}
-		if (key_exists($action,$array)) {
-			$access = $array[$action];	
+		if (key_exists ( $action, $array )) {
+			$access = $array [$action];
 		}
-		if ($access == 'deny' && !isset($_SESSION['User']->id)) {
-			Core::SetFlash('Login required',MSG_LOGIN_REQUIRED);
-			Core::Redirect('user/login');
+		if ($access == 'deny' && ! isset ( $_SESSION ['User']->id )) {
+			Core::SetFlash ( 'Login required', MSG_LOGIN_REQUIRED );
+			Core::Redirect ( 'user/login' );
 		}
 	}
 }

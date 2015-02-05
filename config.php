@@ -2,7 +2,7 @@
 // ////////////////////////////
 // DEBUG MODE//////////////////
 // ////////////////////////////
-define ( 'DEBUG_MODE', TRUE );
+ define ( 'DEBUG_MODE', FALSE );
 $GLOBALS ['debug'] = '';
 
 // Root and Directory Separator
@@ -69,6 +69,15 @@ function modelLoader($class) {
 	}
 	include $file;
 }
+function tcpdfLoader($class) {
+	$filename = $class . '.php';
+	$file = 'tcpdf/' . $filename;
+	if (! file_exists ( $file )) {
+		return false;
+	}
+	include $file;
+}
+
 
 /**
  * * register the loader functions **
@@ -76,6 +85,7 @@ function modelLoader($class) {
 spl_autoload_register ( 'libLoader' );
 spl_autoload_register ( 'modelLoader' );
 spl_autoload_register ( 'controllerLoader' );
+spl_autoload_register ( 'tcpdfLoader');
 /**
  * Define flash messages
  */
