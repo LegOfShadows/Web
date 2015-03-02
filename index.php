@@ -12,4 +12,3 @@ $router = new Router ();
 // Log::Add('Time',date('Y-M-d', time()));
 // END TEST AREA //
 $router->Route ();
-

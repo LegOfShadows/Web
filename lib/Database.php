@@ -23,5 +23,8 @@ class Database extends Singleton {
 	 * Closes the DB connection when class is destroyed
 	 */
 	public function __destruct() {
+		if (isset($this->con)) {
+			unset($this->con);
+		}
 	}
 }

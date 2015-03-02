@@ -61,4 +61,5 @@ abstract class String extends Core {
 	public static function TrimLast($string) {
 		return substr ( $string, 0, strlen ( $string ) - 1 );
 	}
+	
 }

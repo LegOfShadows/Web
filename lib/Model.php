@@ -2,12 +2,13 @@
 class Model extends Core {
 	// Default properties
 	public $id;
-	public $created;
-	public $modified;
 	public function __construct() {
 	}
+	public function GetDB() {
+		return Database::getInstance();
+	}
 	public function Load($id) {
-		$db = Database::getInstance ();
+		$db = $this->GetDB();
 		$query = 'SELECT * FROM ' . String::Table ( $this->Name () ) . ' WHERE id=:id';
 		$stm = $db->con->prepare ( $query );
 		$params = array (
@@ -25,7 +26,7 @@ class Model extends Core {
 		}
 	}
 	public function Save() {
-		$db = Database::getInstance ();
+		$db = $this->GetDB();
 		$query = $this->QueryUpdate ();
 		$stm = $db->con->prepare ( $query );
 		foreach ( $this as $k => &$v ) {
@@ -45,7 +46,7 @@ class Model extends Core {
 		$this->created = 0;
 		$this->modified = 0;
 		
-		$db = Database::getInstance ();
+		$db = $this->GetDB();
 		$query = $this->QueryInsert ();
 		$stm = $db->con->prepare ( $query );
 		foreach ( $this as $k => &$v ) {
@@ -61,7 +62,7 @@ class Model extends Core {
 		}
 	}
 	public function Delete($id) {
-		$db = Database::getInstance ();
+		$db = $this->GetDB();
 		$query = 'DELETE FROM ';
 		$query .= String::Table ( $this->Name () );
 		$query .= ' WHERE id=:id';
@@ -78,7 +79,7 @@ class Model extends Core {
 		}
 	}
 	public function All($start = false, $count = false) {
-		$db = Database::getInstance ();
+		$db = $this->GetDB();
 		$query = 'SELECT * FROM ';
 		$query .= String::Table ( $this->Name () );
 		if ($start != false && $count != false) {
@@ -102,7 +103,7 @@ class Model extends Core {
 	 * @return unknown|boolean
 	 */
 	public function Exists($check) {
-		$db = Database::getInstance ();
+		$db = $this->GetDB();
 		$query = 'SELECT id FROM ';
 		$query .= String::Table ( $this->Name () );
 		$query .= ' WHERE ';

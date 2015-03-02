@@ -3,7 +3,7 @@ $links = array (
 		'Home' => '/home',
 		'Test' => '/home/test',
 		'Forum' => '/forum',
-		'FTP' => 'ftp://legofshadows.ddns.net' 
+		'MTG' => '/mtg'
 );
 if (Auth::Check ( 3 )) {
 	$links ['Admin'] = '/user/all';

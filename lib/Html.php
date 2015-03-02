@@ -17,7 +17,7 @@ class Html extends Core {
 	 *
 	 * @return string
 	 */
-	private static function Script() {
+	private static function Script($url) {
 		echo '<script type="text/javascript" src="' . $url . '">';
 	}
 	/**
@@ -47,7 +47,7 @@ class Html extends Core {
 	 *
 	 * @param string $name        	
 	 */
-	public static function GetElement($name) {
+	public static function GetElement($name,$data = null) {
 		include ELEMENT_DIR . $name . '.php';
 	}
 	public static function CreateElement($tag, $text, $options = array()) {

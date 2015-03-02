@@ -11,12 +11,12 @@ class Auth extends Core {
 			'author',
 			'moderator',
 			'administrator',
-			'master' 
+			'master'
 	);
 	/**
 	 * Checks if current user's level is at least equal to $level
 	 * 
-	 * @param unknown $level        	
+	 * @param integer $level
 	 * @return boolean
 	 */
 	public static function Check($level) {

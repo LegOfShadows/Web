@@ -4,24 +4,7 @@ class Router extends Core {
 	private $action = 'index';
 	private $param1 = false;
 	private $param2 = false;
-	/**
-	 * Allowed Actions for Controllers
-	 *
-	 * @var array of strings
-	 */
-	private $actions = array (
-			'index',
-			'all',
-			'create',
-			'delete',
-			'edit',
-			'test',
-			'login',
-			'logout',
-			'register',
-			'thread',
-			'post',
-	);
+
 	/**
 	 * Construct of Router class;
 	 * Parses the url and assigns variables which are used to control the web routing
@@ -38,7 +21,7 @@ class Router extends Core {
 		if (isset ( $command [1] )) {
 			$this->controller = $command [1];
 		}
-		if (isset ( $command [2] ) && in_array ( $command [2], $this->actions )) {
+		if (isset ( $command [2] )) {
 			$this->action = $command [2];
 		}
 		if (isset ( $command [3] )) {
@@ -77,7 +60,7 @@ class Router extends Core {
 	 *
 	 * @param String $string:
 	 *        	item to test
-	 * @return s Boolean: false if empty string, true otherwise
+	 * @return Boolean: false if empty string, true otherwise
 	 */
 	public static function RemoveEmpty($string) {
 		if ($string == '') {
