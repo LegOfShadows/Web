@@ -30,7 +30,7 @@ class View extends Core {
 				$$k = $v;
 			}
 			//$this->PrepareData();
-			include TEMPLATE_DIR . 'default.php';
+			include TEMPLATE_DIR . 'colored.php';
 		}
 	}
 

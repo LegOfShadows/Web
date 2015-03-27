@@ -1,0 +1,111 @@
+body, h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+	padding: 0;
+	line-height: 1.1em;
+}
+body {
+	width: 1000px;
+	margin: 0 auto;
+	float: none;
+	/* Font Defaults */
+	font-size: 11pt;
+	font-family: 'Tahoma', 'Verdana', 'sans-serif';
+}
+h1 {
+    position: absolute;
+	font-size: 4.0em;
+    padding: 0.25em;
+	padding-left: 2em;
+    line-height: 1.5em;
+	background: url("img/logo.png") 0.2em 0.2em no-repeat;
+}
+h2 {
+	font-size: 1.8em;
+}
+h3 {
+	font-size: 1.5em;
+}
+h4 {
+	font-size: 1.3em;
+}
+h5 {
+	font-size: 1.2em;
+}
+h6 {
+	font-size: 1.1em;
+}
+p {
+	font-size: 1.0em;
+}
+header {
+	height: 8em;
+	border-bottom: 3pt solid #fff;
+}
+header a {
+    display: block;
+    float: right;
+    padding: 0.25em;
+    line-height: 3.5em;
+    font-weight: bold;
+    font-size: 2em;
+    text-decoration: none;
+}
+header a:hover {
+    border-bottom: 3pt solid #fff;
+}
+
+nav {
+	height: 2em;
+	border-bottom: 3pt solid #fff;
+	font-size: 1.5em;
+	clear: both;
+}
+nav a {
+	display: block;
+	float: left;
+	padding: 0.25em;
+	height: 1.5em;
+	line-height: 1.5em;
+	font-weight: bold;
+	text-decoration: none;
+}
+nav a:hover {
+	border-bottom: 3pt solid #fff;
+}
+main {
+	border-bottom: 3pt solid #fff;
+}
+article {
+    margin: 1em 0;
+    padding: 1em;
+    border-left: 3pt solid #fff;
+}
+article p {
+    margin-bottom: 0.5em;
+}
+article div {
+    font-size: 0.9em;
+}
+table {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 0.25em;
+}
+form {
+    padding: 0.25em;
+}
+footer {
+	margin-top: 2em;
+	border-top: 3pt solid #fff;
+	text-align: center;
+	font-size: 0.75em;
+    text-shadow: 0.1em 0.1em 0.25em #000;
+}
+footer p {
+	font-weight: bold;
+	line-height: 1.5em;
+}

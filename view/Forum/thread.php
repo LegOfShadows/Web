@@ -1,16 +1,12 @@
-<div class="ctrlForumList">
 <?php foreach ($posts as $post) { ?>
-	<div class="ctrlForumPost">
-		<div class="ctrlForumPostAuthor">
-			<div class="ctrlForumUser"><?php echo $post['username']?></div>
-			<div class="ctrlForumLevel"><?php echo Auth::AccessLevel($post['accesslevel'])?></div>
-			<div class="ctrlForumDate"><?php echo $post['created']?></div>
-		</div>
-		<div class="ctrlForumPostBody"><?php echo $post['text']?></div>
-		<div class="ctrlForumClear"></div>
-	</div>
+    <article>
+        <p><?php echo $post['text']?></p>
+        <p>
+            <address><?php echo $post['username']?><br><?php echo Auth::AccessLevel($post['accesslevel']); ?></address>
+            <time><?php echo $post['created']?></time>
+        </p>
+    </article>
 <?php }?>
-	<div class="ctrlForumReply">
-		<a href="/forum/post/<?php echo $thread->id?>" class="ctrlItemButton">Reply</a>
-	</div>
+<div class="ctrlForumReply">
+    <a href="/forum/post/<?php echo $thread->id?>" class="ctrlItemButton">Reply</a>
 </div>

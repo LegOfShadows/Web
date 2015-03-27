@@ -4,13 +4,20 @@
  * @author Ivan
  */
 class Html extends Core {
-	/**
-	 * Generates a string containing all HTML link elements with the extra styles for the document
-	 *
-	 * @return string
-	 */
-	public static function Style($url) {
-		echo '<link rel="stylesheet" type="text/css" href="' . $url . '">';
+    /**
+     * @param string $url
+     * @param bool $media add specific media settings for stylesheet
+     *
+     * @out echoes <link> tag for CSS
+     */
+    public static function Style($url,$media = false) {
+        $link = '<link rel="stylesheet" type="text/css" href="';
+        $link .= $url;
+        if ($media) {
+            $link .= '" media="'.$media;
+        }
+        $link .= '">';
+		echo $link;
 	}
 	/**
 	 * Generates a string containing all HTML script elements with the included scripts for the document
@@ -29,16 +36,10 @@ class Html extends Core {
 		if (Core::HasFlash ()) {
 			$inner = '';
 			foreach ( Core::GetFlash () as $k => $v ) {
-				$inner .= Html::CreateElement ( 'span', $k, array (
-						'class' => 'ctrlNotificationTitle' 
-				) ) . ' : ';
-				$inner .= Html::CreateElement ( 'span', $v, array (
-						'class' => 'ctrlNotificationText' 
-				) ) . '<br>';
+				$inner .= Html::CreateElement ( 'strong', $k) . ' : ';
+				$inner .= Html::CreateElement ( 'em', $v) . '<br>';
 			}
-			$outer = Html::CreateElement ( 'div', $inner, array (
-					'id' => 'wrpNotification' 
-			) );
+			$outer = Html::CreateElement ( 'div', $inner);
 			echo $outer;
 		}
 	}

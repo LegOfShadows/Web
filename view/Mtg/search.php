@@ -8,6 +8,8 @@ if (isset($cards)) {
     echo Html::CreateElement('h4',"Found $count card(s)");
     foreach ($cards as $card) {
         Mtg::ParseMana($card['cost']);
+		Mtg::ParseText($card['text']);
+		Mtg::ParseType($card['type']);
         Html::GetElement('card',$card);
     }
 } else {

@@ -57,7 +57,7 @@ class ForumController extends Controller {
 	public function create() {
 		if (! Auth::Check ( 2 )) {
 			$this->SetFlash ( 'Forbidden', 'Your access level is too low to create new threads' );
-			$this->Redirect ( 'forum/index/' . $id );
+			$this->Redirect ( 'forum/index');
 		}
 		$data = $this->Thread->GetCategories ();
 		$this->view->AddData ( array (
@@ -65,10 +65,10 @@ class ForumController extends Controller {
 		) );
 		if ($this->IsPost ()) {
 			Log::Add('post',$_POST);
-			/*
 			$this->Thread->title = $_POST ['title'];
 			$this->Thread->category = $_POST ['category'];
-			$this->Thread->New ();*/
+            $this->Thread->owner = $_SESSION['User']->id;
+			$this->Thread->Create();
 		} else {
 
 		}

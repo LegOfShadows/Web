@@ -68,7 +68,7 @@ class Model extends Core {
 		$query .= ' WHERE id=:id';
 		$stm = $db->con->prepare ( $query );
 		$params = array (
-				':id' => $id 
+				':id' => $id
 		);
 		if ($stm->execute ( $params )) {
 			Log::Add ( 'DB Success', $this->Name () . ' record was deleted' );
